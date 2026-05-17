@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzo Kingdom - Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+            padding: 20px;
+        }
+
+        .hero-card {
+            background: rgba(40, 40, 45, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 100, 110, 0.3);
+            border-radius: 30px;
+            padding: 80px 60px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #b0b0b5;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #888;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #999;
+            margin-bottom: 50px;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+            padding: 30px 20px;
+            background: rgba(50, 50, 55, 0.5);
+            border-radius: 20px;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .feature-item {
+            padding: 20px;
+            background: rgba(60, 60, 68, 0.6);
+            border: 1px solid rgba(100, 100, 110, 0.2);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(70, 70, 80, 0.8);
+            border-color: rgba(150, 150, 160, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: #b0b0b5;
+            font-weight: 500;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        button {
+            padding: 14px 45px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #666;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #777;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #b0b0b5;
+            border: 2px solid #666;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(100, 100, 110, 0.3);
+            border-color: #888;
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: #666;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 100px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #222228 100%);
+        }
+
+        .section:nth-child(even) {
+            background: linear-gradient(135deg, #222228 0%, #1a1a1a 100%);
+        }
+
+        .section-content {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(40, 40, 45, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 100, 110, 0.3);
+            border-radius: 30px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #b0b0b5;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .section p {
+            color: #999;
+            font-size: 1rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: rgba(60, 60, 68, 0.6);
+            border: 1px solid rgba(100, 100, 110, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(70, 70, 80, 0.8);
+            border-color: rgba(150, 150, 160, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #b0b0b5;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-section button {
+            padding: 16px 50px;
+            font-size: 1.1rem;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .hero-card { padding: 40px 25px; }
+            .section { padding: 50px 20px; }
+            .section-content { padding: 40px; }
+            .section h2 { font-size: 1.8rem; }
+            .btn-container { flex-direction: column; }
+            button { width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+
+<div class="content">
+    <section class="hero">
+        <div class="hero-card">
+            <h1>🏠Buzo Kingdom </h1>
+            <p class="subtitle">Your Smart Kitchen Assistant</p>
+            <p class="description">Discover what you can cook with the ingredients you have at home. Smart filtering, nutrition info, and restaurant-quality recipes delivered locally.</p>
+
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">🥘</div>
+                    <div class="feature-text">10+ Recipes</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📦</div>
+                    <div class="feature-text">Smart Inventory</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">Lightning Fast</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">100% Local</div>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn-primary" onclick="enterApp()">Enter App</button>
+                <button class="btn-secondary" onclick="scrollToSection()">Learn More</button>
+            </div>
+            <div class="scroll-indicator">↓</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-content cta-section">
+            <h2>Why Home Architect?</h2>
+            <p>Stop wondering what to cook. Let your ingredients decide for you.</p>
+
+            <div class="features-list">
+                <div class="feature-card">
+                    <h3>📊 Smart Inventory</h3>
+                    <p>Track your ingredients and never waste food again.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Perfect Matches</h3>
+                    <p>Find recipes that match your available ingredients exactly.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🍽️ Almost There</h3>
+                    <p>See recipes you can almost make with just 1-2 missing items.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Fast & Local</h3>
+                    <p>Runs entirely on your local machine. No cloud, no privacy concerns.</p>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="enterApp()">Start Cooking Now</button>
+        </div>
+    </section>
+</div>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.z = Math.random() * 200;
+            this.size = Math.random() * 2 + 1;
+            this.speed = Math.random() * 0.5 + 0.2;
+        }
+
+        update() {
+            this.z -= this.speed;
+            if (this.z <= 0) {
+                this.z = 200;
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+            }
+        }
+
+        draw() {
+            const scale = this.z / 200;
+            const opacity = scale * 0.3;
+            ctx.fillStyle = `rgba(150, 150, 160, ${opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    const particles = Array.from({ length: 80 }, () => new Particle());
+
+    function animate() {
+        ctx.fillStyle = 'rgba(26, 26, 26, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+    });
+
+    function enterApp() {
+        window.location.href = '/index.html';
+    }
+
+    function scrollToSection() {
+        document.querySelector('.section').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

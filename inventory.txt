@@ -1,0 +1,25 @@
+eggs
+milk
+chicken
+rice
+tomato
+cheese
+cucumber
+pasta
+bread
+tuna
+corn
+lettuce
+onion
+garlic
+potato
+carrot
+mushrooms
+butter
+yogurt
+lemon
+olive oil
+honey
+teriyaki
+soy sauce
+flour
