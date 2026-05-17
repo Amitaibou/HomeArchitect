@@ -368,7 +368,7 @@ Open for personal use. Modify and distribute as needed!
 
 ## 👨‍💻 Author
 
-**Amitai and Asaf**  
+**Amitai Bouzaglo **  
 Created with ❤️ for a smarter kitchen.
 
 ---
